@@ -1,0 +1,28 @@
+.header {
+  padding: 1rem;
+  background-color: #363843;
+}
+
+.logo {
+  width: 100px;
+}
+
+.navigation {
+  display: inline-block;
+}
+
+.navList {
+  margin: 0;
+  padding: 0;
+}
+
+.navItems {
+  list-style: none;
+  float: left;
+  margin-left: 1.5rem;
+}
+
+.navLink {
+  color: #fff;
+  text-transform: uppercase;
+}

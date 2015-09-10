@@ -1,0 +1,8 @@
+.title {
+  composes: pageTitle from '../../App/styles/shared.css';
+}
+
+.container {
+  composes: pageContainer from '../../App/styles/shared.css';
+  background-color: #fff;
+}

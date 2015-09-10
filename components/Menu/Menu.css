@@ -1,0 +1,61 @@
+.base {
+  position: absolute;
+  top: 4rem;
+  right: 1rem;
+  z-index: 1;
+  border-radius: 4px;
+  width: 25rem;
+  composes: bg from '../Header/styles/Header.css';
+}
+
+.closed {
+  composes: base;
+  display: none;
+}
+
+.open {
+  composes: base;
+  display: block;
+}
+
+.padding {
+  padding-left: 2rem;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  list-style: none;
+}
+
+.link {
+  color: #a6a6ad;
+  display: block;
+  composes: padding;
+  margin: 1.25rem 0;
+  font-size: 1.1rem;
+}
+
+.logout {
+  composes: item;
+  border-top: 1px solid #a6a6ad;
+}
+
+.userInfo {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #a6a6ad;
+}
+
+.userName {
+  margin: 0;
+  font-size: 1.5rem;
+  composes: padding;
+}
+
+.userEmail {
+  margin: 0;
+  composes: padding;
+}

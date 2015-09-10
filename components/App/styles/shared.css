@@ -1,0 +1,35 @@
+.pageTitle {
+  font-size: 1.5rem;
+  color: #363843;
+  margin: 0;
+  padding: 3rem 0;
+}
+
+.pageContainer {
+  padding: 1rem 5%;
+}
+
+.form {}
+
+.form input[type="text"], .form input[type="email"], .form input[type="password"] {
+  padding: 1.5rem 1rem;
+  background: #fff;
+  border: 1px solid #dddddd;
+  display: block;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.form input[type="submit"] {
+  width: 100%;
+  display: block;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 4px;
+  background-color: #41ac41;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  border: none;
+  outline: none;
+}

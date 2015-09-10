@@ -1,22 +1,30 @@
 import React from 'react';
-import { Router, Route, Link } from 'react-router';
-import createHistory from 'history/lib/createBrowserHistory';
+import { connect } from 'react-redux';
 
-import Home from '../../components/Home/Home'
-import Dashboard from '../../components/Dashboard/Dashboard'
+import Header from '../../components/Header/Header'
 
-// import base app styles
-import './App.js'
+import 'normalize.css'
+import '../../components/App/styles/base.css'
 
-export default React.createClass({
+class App extends React.Component {
   render() {
+    const { fetching, dispatch } = this.props
     return (
       <div>
-        <Router history={createHistory()}>
-          <Route path="/" component={Home} />
-          <Route path="dashboard" component={Dashboard} />
-        </Router>
+        <Header />
+        { fetching ? <h1>loading...</h1> : this.props.children }
       </div>
     )
   }
-})
+}
+
+App.propTypes = {
+  dispatch: React.PropTypes.func.isRequired,
+  fetching: React.PropTypes.bool.isRequired
+}
+
+function mapStateToProps(state) {
+  return { fetching: state.get('fetching') }
+}
+
+export default connect(mapStateToProps)(App);

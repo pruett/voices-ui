@@ -1,0 +1,24 @@
+.wrapper {
+  width: 25rem;
+  margin: 5rem auto;
+  background-color: #fff;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  padding: 5rem;
+}
+
+.logo {
+  width: 55%;
+  margin: 1rem auto;
+  min-width: 200px;
+  display: block;
+}
+
+.login {
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.form {
+  composes: form from '../../containers/App/shared.css'
+}

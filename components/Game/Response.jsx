@@ -1,20 +1,25 @@
 import React from 'react'
 
-export default React.createClass({
+export default class Response extends React.Component {
+  constructor () {
+    super()
+  }
+
   updateResponseText (id, actions, event) {
     actions.updateResponseText(id, event.target.value)
-  },
+  }
 
   removeResponse (id, questionId, actions) {
     actions.removeResponse(id, questionId)
-  },
+  }
 
-  render() {
+  render () {
     let { response, questionId, actions } = this.props
 
     return (
       <li>
-        <input type="text"
+        <input
+          type='text'
           value={response.get('text')}
           onChange={this.updateResponseText.bind(this, response.get('id'), actions)}
         />
@@ -27,4 +32,10 @@ export default React.createClass({
       </li>
     )
   }
-})
+}
+
+Response.propTypes = {
+  response: React.PropTypes.object.isRequired,
+  questionId: React.PropTypes.number.isRequired,
+  actions: React.PropTypes.object.isRequired
+}

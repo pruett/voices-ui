@@ -1,43 +1,32 @@
 import React from 'react'
-
 import Menu from '../Menu/Menu'
-
 import styles from './styles/Header.css'
 import logo from '../App/images/logo.svg'
 import avatar from '../App/images/avatar.png'
 
-export default React.createClass({
-  getInitialState () {
-    return {
-      showMenu: false
-    }
-  },
+export default class Header extends React.Component {
+  constructor () {
+    super()
+    this.state = { showMenu: false }
+  }
 
-  getDefaultProps () {
-    return {
-      links: ['Dashboard', 'Support']
-    }
-  },
+  toggle = () => { // eslint-disable-line
+    this.setState(({ showMenu }) => ({ showMenu: !this.state.showMenu }))
+  }
 
-  toggle () {
-    this.setState({ showMenu: !this.state.showMenu })
-  },
-
-  render() {
-    let navLinks = this.props.links.map((link,id) => {
-      return (
-        <li key={id} className={styles.item}>
-          <a className={styles.link}>{link}</a>
-        </li>
-      )
-    })
+  render () {
+    let navLinks = this.props.links.map((link, id) => (
+      <li key={id} className={styles.item}>
+        <a className={styles.link}>{link}</a>
+      </li>
+    ))
 
     return (
       <header className={styles.header}>
-        <a href="#">
+        <a href='#'>
           <img className={styles.logo} src={logo}/>
         </a>
-        <nav role="navigation" className={styles.nav}>
+        <nav role='navigation' className={styles.nav}>
           <ul className={styles.list}>
             {navLinks}
           </ul>
@@ -47,8 +36,13 @@ export default React.createClass({
         </div>
 
         <Menu showMenu={this.state.showMenu} />
-
       </header>
     )
   }
-})
+}
+
+Header.propTypes = {
+  links: React.PropTypes.array.isRequired
+}
+
+Header.defaultProps = { links: ['Dashboard', 'Support'] }

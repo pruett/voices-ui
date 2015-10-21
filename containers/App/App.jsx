@@ -1,14 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
-
-import Header from '../../components/Header/Header'
-
-import 'normalize.css'
+import React from 'react'
+import { connect } from 'react-redux'
 import '../../components/App/styles/base.css'
+import Header from '../../components/Header/Header'
+import 'normalize.css'
 
 class App extends React.Component {
-  render() {
-    const { fetching, dispatch } = this.props
+  render () {
+    const { fetching } = this.props
+
     return (
       <div>
         <Header />
@@ -19,12 +18,12 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  fetching: React.PropTypes.bool.isRequired
+  fetching: React.PropTypes.bool.isRequired,
+  children: React.PropTypes.node.isRequired
 }
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return { fetching: state.get('fetching') }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps)(App)

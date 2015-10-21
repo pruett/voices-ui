@@ -1,25 +1,13 @@
 import React from 'react'
-
 import styles from './Menu.css'
-import avatar from '../App/images/avatar.png'
 
-export default React.createClass({
-
-  getDefaultProps () {
-    return {
-      links: [ 'User Profile', 'Billing Information', 'Subscription Plan' ],
-      showMenu: false
-    }
-  },
-
-  render() {
-    let menuLinks = this.props.links.map((link, id) => {
-      return (
-        <li className={styles.item} key={id}>
-          <a className={styles.link}>{link}</a>
-        </li>
-      )
-    })
+export default class Menu extends React.Component {
+  render () {
+    let menuLinks = this.props.links.map((link, id) => (
+      <li className={styles.item} key={id}>
+        <a className={styles.link}>{link}</a>
+      </li>
+    ))
 
     return (
       <div className={this.props.showMenu ? styles.open : styles.closed}>
@@ -39,4 +27,14 @@ export default React.createClass({
       </div>
     )
   }
-})
+}
+
+Menu.propTypes = {
+  links: React.PropTypes.array.isRequired,
+  showMenu: React.PropTypes.boolean.isRequired
+}
+
+Menu.defaultProps = {
+  links: [ 'User Profile', 'Billing Information', 'Subscription Plan' ],
+  showMenu: false
+}

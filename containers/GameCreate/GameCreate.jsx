@@ -1,19 +1,16 @@
 import React from 'react'
-import { Map, fromJS } from 'immutable'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Question from '../../components/Game/Question'
-import Response from '../../components/Game/Response'
 import * as actionCreators from '../../actions'
 
 class GameCreate extends React.Component {
   componentWillMount () {
-    if ( !this.props.location.state
-      || !this.props.location.state.id
-      || this.props.game === undefined
+    if (!this.props.location.state ||
+      !this.props.location.state.id ||
+      this.props.game === undefined
     ) {
       console.log('redirect back to dashboard as you didnt go through the correct path, but for now, just create the game')
-      //this.props.actions.createNewGame(this.props.location.state.id)
+        // this.props.actions.createNewGame(this.props.location.state.id)
     }
   }
 
@@ -48,9 +45,9 @@ class GameCreate extends React.Component {
         </code>
         <h1>{game.get('title') ? game.get('title') : '[new game]'}</h1>
 
-        <label htmlFor="gameTitle">Title</label><br/>
-        <input type="text"
-               id="gameTitle"
+        <label htmlFor='gameTitle'>Title</label><br/>
+        <input type='text'
+               id='gameTitle'
                onChange={this.updateGameTitle.bind(this, id, actions)} />
 
         <hr/>
@@ -60,20 +57,21 @@ class GameCreate extends React.Component {
               <li key={question.get('id')}>
                 <h2>{question.get('title') ? question.get('title') : '[enter question text]'}</h2>
                 <label htmlFor={`question${question.get('id')}`}>Question #{qindex + 1}</label><br/>
-                <input type="text"
-                       id={`question${question.get('id')}`} 
+                <input type='text'
+                       id={`question${question.get('id')}`}
                        onChange={this.updateQuestionTitle.bind(this, question.get('id'), actions)} />
                 <ul>
                   {question.get('responseIds').map(i =>
                     responses.get(i.toString())).map((response, rindex) => (
                       <li key={response.get('id')}>
                         <label htmlFor={`response${response.get('id')}`}>Response #{rindex + 1}</label><br/>
-                        <input type="radio"
+                        <input type='radio'
                           checked={response.get('correct')}
                         />
-                        <input type="text"
-                               id={`response${response.get('id')}`} 
-                               onChange={this.updateResponseText.bind(this, response.get('id'), actions)}
+                        <input
+                          type='text'
+                          id={`response${response.get('id')}`}
+                          onChange={this.updateResponseText.bind(this, response.get('id'), actions)}
                         />
                       </li>
                     ))
@@ -89,6 +87,14 @@ class GameCreate extends React.Component {
       </div>
     )
   }
+}
+
+GameCreate.propTypes = {
+  location: React.PropTypes.object,
+  game: React.PropTypes.object.isRequired,
+  questions: React.PropTypes.object.isRequired,
+  responses: React.PropTypes.object.isRequired,
+  actions: React.PropTypes.object.isRequired
 }
 
 function mapStateToProps (state, ownProps) {

@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../../actions'
 
-const Game = React.createClass({
-  vote(gameId, questionId, responseId, actions) {
+class Participant extends React.Component {
+  vote = (gameId, questionId, responseId, actions) => { //eslint-disable-line
     actions.vote(gameId, questionId, responseId)
-  },
+  }
 
-  render() {
+  render () {
     let { session, games, questions, responses, actions } = this.props
     let game = games.get(session.get('gameId').toString())
 
@@ -24,7 +24,7 @@ const Game = React.createClass({
         </code>
 
         <p>
-          <Link to={`/backstage/${session.get('id')}`} target="_blank">backstage view</Link>
+          <Link to={`/backstage/${session.get('id')}`} target='_blank'>backstage view</Link>
         </p>
 
         <ul>
@@ -32,7 +32,7 @@ const Game = React.createClass({
             <li key={i}>
               <h2>{q.get('title')}</h2>
               <ul>
-                {q.get('responseIds').toArray().map(i => responses.get(i.toString())).map((r, i) => 
+                {q.get('responseIds').toArray().map(i => responses.get(i.toString())).map((r, i) =>
                   <li key={i}>
                     <p>{r.get('text')}
                       <span> --- {session.getIn(
@@ -54,9 +54,17 @@ const Game = React.createClass({
       </li>
     )
   }
-})
+}
 
-function mapStateToProps(state, ownProps) {
+Participant.propTypes = {
+  session: React.PropTypes.object.isRequired,
+  games: React.PropTypes.object.isRequired,
+  questions: React.PropTypes.object.isRequired,
+  responses: React.PropTypes.object.isRequired,
+  actions: React.PropTypes.object.isRequired
+}
+
+function mapStateToProps (state, ownProps) {
   return {
     session: state.getIn(['sessions', ownProps.params.id]),
     games: state.get('games'),
@@ -65,8 +73,8 @@ function mapStateToProps(state, ownProps) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps (dispatch) {
   return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Game);
+export default connect(mapStateToProps, mapDispatchToProps)(Participant)

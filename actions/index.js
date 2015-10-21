@@ -71,8 +71,9 @@ export let createNewGame = (id) => (dispatch, getState) => {
   dispatch(addResponse(nextResponseId + 1, false))
   dispatch(addResponse(nextResponseId + 2, true))
   dispatch(addResponse(nextResponseId + 3, false))
+
   // create a new game with those questions/responses
-  dispatch(addGame(id, [nextQuestionId, nextQuestionId + 1]))
+  dispatch(addGame(nextGameId, [nextQuestionId, nextQuestionId + 1]))
 }
 
 export let saveGame = () => (dispatch, getState) => {

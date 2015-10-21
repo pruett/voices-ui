@@ -3,15 +3,16 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import * as actionCreators from '../../actions'
-
 import styles from '../../components/Dashboard/styles/Dashboard.css'
 
 class Dashboard extends Component {
-  createNewGame = (id, actions) => actions.createNewGame(id)
+  createNewGame = (id, actions) => // eslint-disable-line
+    actions.createNewGame(id)
 
-  createSession = (id, actions) => actions.createSession(id)
+  createSession = (id, actions) => // eslint-disable-line
+    actions.createSession(id)
 
-  render() {
+  render () {
     const { nextGameId, games, sessions, actions } = this.props
 
     return (
@@ -28,14 +29,14 @@ class Dashboard extends Component {
               <button onClick={this.createSession.bind(this, game.get('id'), actions)}>Create New Session</button>
 
               <ul>
-                {game.get('sessionIds').map(i => 
+                {game.get('sessionIds').map(i =>
                   sessions.get(i.toString())).map((session, sindex) => (
                     <li key={sindex}>
                       <Link to={`/play/${session.get('id')}`}>play</Link>&nbsp;|&nbsp;
                       <Link to={`/backstage/${session.get('id')}`}>backstage</Link>
                     </li>
                   ))
-                }  
+                }
               </ul>
             </li>
           ))}
@@ -45,12 +46,19 @@ class Dashboard extends Component {
   }
 }
 
+Dashboard.propTypes = {
+  nextGameId: React.PropTypes.number.isRequired,
+  games: React.PropTypes.object.isRequired,
+  sessions: React.PropTypes.object.isRequired,
+  actions: React.PropTypes.object.isRequired
+}
+
 let nextGameId = (state) =>
   state.get('games')
     ? parseInt(Object.keys(state.get('games').toJS()).sort((a, b) => b > a)[0], 10) + 1
     : 1
 
-function mapStateToProps(state) {
+function mapStateToProps (state) {
   return {
     nextGameId: nextGameId(state),
     games: state.get('games'),
@@ -62,4 +70,4 @@ function mapDispatchToProps (dispatch) {
   return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

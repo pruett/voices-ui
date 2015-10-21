@@ -1,11 +1,8 @@
 import React from 'react'
-import { List } from 'immutable'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
 import Question from '../../components/Game/Question'
 import Response from '../../components/Game/Response'
-
 import * as actionCreators from '../../actions'
 
 const RenderSurveyQuestions = ({ questions, responses, actions }) => (
@@ -22,9 +19,10 @@ const RenderSurveyQuestions = ({ questions, responses, actions }) => (
   </ul>
 )
 
-const Game = React.createClass({
+class Game extends React.Component {
   render () {
     let { game, questions, responses, actions } = this.props
+
     return (
       <div>
         <RenderSurveyQuestions
@@ -38,7 +36,14 @@ const Game = React.createClass({
       </div>
     )
   }
-})
+}
+
+Game.propTypes = {
+  game: React.PropTypes.object.isRequired,
+  questions: React.PropTypes.object.isRequired,
+  responses: React.PropTypes.object.isRequired,
+  actions: React.PropTypes.object.isRequired
+}
 
 function mapStateToProps (state, ownProps) {
   return {
